@@ -32,9 +32,17 @@ const CommingSoon = () => {
     return () => clearInterval(timer)
   }, [])
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(email){
+      setSubmitted(true)
+      setEmail("");
+    }
+  }
+
   return (
     <div className='min-h-screen bg-brand-primary flex-flex-col items-center justify-center px-4 text-center'>
-      <div className='max-w-2xl mx-auto'>
+      <div className='max-w-2xl mx-auto pt-6'>
         <h1 className='text-5xl md:text-7xl font-bold text-white mb-4'>
           Rantle Construction
         </h1>
@@ -61,6 +69,28 @@ const CommingSoon = () => {
               </div>
             </div>
           ))}
+        </div>
+        <p className="text-gray-300 mb-6">Our website is undercontruction enter your email to be notified when  we launch</p>
+        {submitted?(
+          <div className="bg-brand-accent border border-brand-accent rounded-lg p-4">
+            <p className="text-brand-warm font-semibold">Thank you! we'll notify you when we launch</p>
+          </div>
+        ):(
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Enter your email'
+            required
+            className='flex-1 px-4 py-3 rounded-lg bg-brand-secondary/50 border border gray-600 text-white placeholder-gray-400  focus:outline-none focus:border-brand-accent' />
+            <button className="px-6 py-3 bg-brand-accent capitalize text-white font-semibold rounded-lg hover:bg-brand-warm transition-colors">
+              notify me
+            </button>
+          </form>
+        )}
+        <div className="mt-12 text-gray-400 text-sm">
+          <p>Phone: 083 717 3812</p>
+          <p>Email: info.rantle.co.za</p>
         </div>
       </div>
     </div>
